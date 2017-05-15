@@ -234,8 +234,10 @@ DynamoDBStream.prototype._trimShards = function () {
 DynamoDBStream.prototype._emitRecordEvents = function (events) {
 	debug('_emitRecordEvents')
 
-	for (var i = 0; i < events.length; i++) {
-		var event = events[i]
+	const uniqueEvents = _.uniq(events, 'eventID');
+	
+	for (var i = 0; i < uniqueEvents.length; i++) {
+		var event = uniqueEvents[i]
 
 		switch (event.eventName) {
 			case 'INSERT':
