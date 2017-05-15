@@ -234,7 +234,7 @@ DynamoDBStream.prototype._trimShards = function () {
 DynamoDBStream.prototype._emitRecordEvents = function (events) {
 	debug('_emitRecordEvents')
 
-	const uniqueEvents = _.uniq(events, 'eventID');
+	const uniqueEvents = _.uniqBy(events, 'eventID');
 	
 	for (var i = 0; i < uniqueEvents.length; i++) {
 		var event = uniqueEvents[i]
